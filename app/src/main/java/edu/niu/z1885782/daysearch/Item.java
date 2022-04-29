@@ -1,6 +1,7 @@
 package edu.niu.z1885782.daysearch;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Item
@@ -58,7 +59,22 @@ public class Item
 
     public int calcDays(String date){
 
-        return (int) getDateDiff(new SimpleDateFormat("dd/MM/yyyy"), "29/05/2017", "31/05/2017");
+        //Declares new java string to be used to grab specific parts of data
+        String[] dateStrings;
+        dateStrings = date.split(" ");
+
+        //Grab and convert month abbrev. to number
+        String month = "";
+
+        //Parse the date parts needed
+        String postDate = dateStrings[1]+"/"+month+"/"+dateStrings[3];
+
+        //Gets and formats current date
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate = sdf.format(new Date());
+
+        //Calculates difference between the two formatted dates
+        return (int) getDateDiff(new SimpleDateFormat("dd/MM/yyyy"), postDate, currentDate);
 
     }
 
