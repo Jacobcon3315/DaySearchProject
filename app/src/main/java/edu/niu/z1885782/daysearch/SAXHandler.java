@@ -30,7 +30,7 @@ public class SAXHandler extends DefaultHandler
         validText = true;
         element = startElement;
         if (startElement.equals("item")) // start current item
-            currentItem = new Item("", "");
+            currentItem = new Item("", "", "");
     }
 
     public void endElement(String uri, String localName,
@@ -48,5 +48,7 @@ public class SAXHandler extends DefaultHandler
             currentItem.setTitle(new String(ch, start, length));
         else if (currentItem != null && element.equals("link") && validText)
             currentItem.setLink(new String(ch, start, length));
+        else if (currentItem != null && element.equals("pubDate") && validText)
+            currentItem.setDays(new String(ch, start, length));
     }
 }

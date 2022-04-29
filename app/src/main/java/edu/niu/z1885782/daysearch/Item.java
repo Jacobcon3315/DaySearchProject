@@ -4,11 +4,13 @@ public class Item
 {
     private String title;
     private String link;
+    private int days;
 
-    public Item(String newTitle, String newLink)
+    public Item(String newTitle, String newLink, String newDays)
     {
         setTitle(newTitle);
         setLink(newLink);
+        setDays(newDays);
     }
 
     public void setTitle(String newTitle)
@@ -21,6 +23,10 @@ public class Item
         link = newLink;
     }
 
+    public void setDays(String newDays){
+
+    }
+
     public String getTitle()
     {
         return title;
@@ -30,6 +36,8 @@ public class Item
     {
         return link;
     }
+
+    public int getDays(){return days;}
 
     public String toString()
     {
