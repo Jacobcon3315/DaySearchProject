@@ -1,5 +1,6 @@
 package edu.niu.z1885782.daysearch;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -8,9 +9,9 @@ public class Item
 {
     private String title;
     private String link;
-    private int days;
+    private String days;
 
-    public Item(String newTitle, String newLink, int newDays)
+    public Item(String newTitle, String newLink, String newDays)
     {
         setTitle(newTitle);
         setLink(newLink);
@@ -27,7 +28,10 @@ public class Item
         link = newLink;
     }
 
-    public void setDays(int newDays){days = newDays;}
+    public void setDays(String newDays)
+    {
+        days = newDays;
+    }
 
     public String getTitle()
     {
@@ -39,7 +43,10 @@ public class Item
         return link;
     }
 
-    public int getDays(){return days;}
+    public String getDays()
+    {
+        return days;
+    }
 
     /**
      * Get a diff between two dates
@@ -64,17 +71,70 @@ public class Item
         dateStrings = date.split(" ");
 
         //Grab and convert month abbrev. to number
-        String month = "";
+        String month = dateStrings[2].toLowerCase();
+
+        switch(month) {
+            case "jan":
+                month = "1";
+                break;
+
+            case "feb":
+                month = "2";
+                break;
+
+            case "mar":
+                month = "3";
+                break;
+
+            case "apr":
+                month = "4";
+                break;
+
+            case "may":
+                month = "5";
+                break;
+
+            case "jun":
+                month = "6";
+                break;
+
+            case "jul":
+                month = "7";
+                break;
+
+            case "aug":
+                month = "8";
+                break;
+
+            case "sep":
+            case "sept":
+                month = "9";
+                break;
+
+            case "oct":
+                month = "10";
+                break;
+
+            case "nov":
+                month = "11";
+                break;
+
+            case "dec":
+                month = "12";
+                break;
+        }
 
         //Parse the date parts needed
         String postDate = dateStrings[1]+"/"+month+"/"+dateStrings[3];
 
         //Gets and formats current date
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         String currentDate = sdf.format(new Date());
 
+        Date pubDate;
+
         //Calculates difference between the two formatted dates
-        return (int) getDateDiff(new SimpleDateFormat("dd/MM/yyyy"), postDate, currentDate);
+        return (int) getDateDiff(new SimpleDateFormat("d/M/yyyy"), postDate, currentDate);
 
     }
 

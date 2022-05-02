@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
 {
     private int listDays = 0;
     private final String URL
-            = "https://feeds.simplecast.com/54nAGcIl";
+            = "https://www.autosport.com/rss/f1/news/";
     private ListView listView;
     private ArrayList<Item> listItems;
 
@@ -36,7 +36,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                listDays = Integer.parseInt(search.getText().toString());
+                try {
+                    listDays = Integer.parseInt(search.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
                 displayList(listItems);
 
             }
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity
             // Build ArrayList of titles to display
             ArrayList<String> titles = new ArrayList<String>();
             for (Item item : items) {
-                if (item.getDays() <= listDays)
+                if (item.calcDays(item.getDays()) <= listDays)
                     titles.add(item.getTitle());
             }
 
