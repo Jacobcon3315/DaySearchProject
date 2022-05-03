@@ -28,6 +28,12 @@ public class Item
         link = newLink;
     }
 
+    /****************************************************************
+     *                                                              *
+     * setDays sets the String that contains the full line of input *
+     * from the pubDate portion of the article.                     *
+     *                                                              *
+     ***************************************************************/
     public void setDays(String newDays)
     {
         days = newDays;
@@ -43,18 +49,23 @@ public class Item
         return link;
     }
 
+    /****************************************************************
+     *                                                              *
+     * getDays returns the String from the pubDate portion of the   *
+     * article.                                                     *
+     *                                                              *
+     ***************************************************************/
     public String getDays()
     {
         return days;
     }
 
-    /**
-     * Get a diff between two dates
-     *
-     * @param oldDate the old date
-     * @param newDate the new date
-     * @return the diff value, in the days
-     */
+    /****************************************************************
+     *                                                              *
+     * getDateDiff calculates the difference, in days, between two  *
+     * dates that are passed into the function.                     *
+     *                                                              *
+     ***************************************************************/
     public static long getDateDiff(SimpleDateFormat format, String oldDate, String newDate) {
         try {
             return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - format.parse(oldDate).getTime(), TimeUnit.MILLISECONDS);
@@ -64,6 +75,15 @@ public class Item
         }
     }
 
+    /****************************************************************
+     *                                                              *
+     * calcDays takes the entire line of pubDate from the article   *
+     * input, parses the spaces out, grabs the needed data, converts*
+     * the month into a number, then formats that date and the      *
+     * current date to be passed into a separate function that      *
+     * gets the exact number of days between those dates.           *
+     *                                                              *
+     ***************************************************************/
     public int calcDays(String date){
 
         //Declares new java string to be used to grab specific parts of data
@@ -73,6 +93,7 @@ public class Item
         //Grab and convert month abbrev. to number
         String month = dateStrings[2].toLowerCase();
 
+        //Converts the month abbreviations into the number equivalent
         switch(month) {
             case "jan":
                 month = "1";
@@ -130,8 +151,6 @@ public class Item
         //Gets and formats current date
         SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         String currentDate = sdf.format(new Date());
-
-        Date pubDate;
 
         //Calculates difference between the two formatted dates
         return (int) getDateDiff(new SimpleDateFormat("d/M/yyyy"), postDate, currentDate);

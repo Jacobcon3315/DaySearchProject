@@ -49,6 +49,6 @@ public class SAXHandler extends DefaultHandler
         else if (currentItem != null && element.equals("link") && validText)
             currentItem.setLink(new String(ch, start, length));
         else if (currentItem != null && element.equals("pubDate") && validText)
-            currentItem.setDays(new String(ch, start, length));
+            currentItem.setDays(new String(ch, start, length)); //Grabs the pubDate portion from the article
     }
 }
